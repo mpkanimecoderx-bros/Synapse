@@ -1,0 +1,11 @@
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<circle cx="14" cy="14" r="13" fill="#050510" stroke="#00fff7" stroke-width="2"/>
+	<path d="M14 7.5c-3.6 0-6.5 2.9-6.5 6.5 0 2.8 1.8 5.2 4.3 6.2.2.1.2-.1.2-.2v-1.1c-1.7.4-2.1-.8-2.1-.8-.2-.6-.6-.8-.6-.8-.5-.3 0-.3 0-.3.6 0 .9.6.9.6.5.9 1.4.6 1.7.5.1-.4.3-.6.5-.8-1.4-.2-2.8-.7-2.8-3 0-.7.2-1.2.6-1.7-.1-.2-.2-.7.1-1.5 0 0 .5-.2 1.7.6.5-.1 1.1-.2 1.7-.2s1.2.1 1.7.2c1.2-.8 1.7-.6 1.7-.6.3.8.2 1.3.1 1.5.4.5.6 1 .6 1.7 0 2.3-1.4 2.8-2.8 3 .2.2.4.5.4 1v1.5c0 .1 0 .3.2.2 2.5-1 4.3-3.4 4.3-6.2 0-3.6-2.9-6.5-6.5-6.5z" fill="none" stroke="url(#githubGradient)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+	<defs>
+		<linearGradient id="githubGradient" x1="7.5" y1="7.5" x2="20.5" y2="20.5" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#00fff7"/>
+			<stop offset="0.5" stop-color="#ff00ea"/>
+			<stop offset="1" stop-color="#00bfff"/>
+		</linearGradient>
+	</defs>
+</svg>

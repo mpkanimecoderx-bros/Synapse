@@ -1,0 +1,14 @@
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<circle cx="14" cy="14" r="13" fill="#050510" stroke="#00fff7" stroke-width="2"/>
+	<rect x="7.5" y="11.5" width="3" height="8" rx="1.2" fill="url(#linkedinGradient)"/>
+	<circle cx="9" cy="9.5" r="1.5" fill="url(#linkedinGradient)"/>
+	<rect x="12.5" y="14.5" width="3" height="5" rx="1.2" fill="url(#linkedinGradient)"/>
+	<path d="M17.5 14.5c0-1.1.9-2 2-2s2 .9 2 2v5h-3v-5z" fill="url(#linkedinGradient)"/>
+	<defs>
+		<linearGradient id="linkedinGradient" x1="7.5" y1="7.5" x2="20.5" y2="20.5" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#00fff7"/>
+			<stop offset="0.5" stop-color="#ff00ea"/>
+			<stop offset="1" stop-color="#00bfff"/>
+		</linearGradient>
+	</defs>
+</svg>
