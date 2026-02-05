@@ -9,7 +9,10 @@ export default function Navbar() {
             <span className="mr-2 drop-shadow-lg">
               <Image src="/logo.svg" alt="Synapse Logo" width={32} height={32} priority />
             </span>
-            <span className="text-2xl font-extrabold tracking-tight neon-logo">Synapse</span>
+            <span className="text-2xl font-extrabold tracking-tight neon-logo" style={{
+              color: '#00fff7',
+              textShadow: '0 0 10px #00fff7, 0 0 20px #ff00ea'
+            }}>Synapse</span>
           </Link>
         </div>
 

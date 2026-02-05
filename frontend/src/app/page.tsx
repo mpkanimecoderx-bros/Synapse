@@ -5,8 +5,8 @@ import Footer from "./components/Footer";
 export default function Home() {
   return (
     <main className="relative min-h-screen flex flex-col items-center justify-center px-4 py-16 overflow-hidden">
-      {/* Animated Neon Background */}
-      <div className="absolute inset-0 -z-10" style={{background: "radial-gradient(circle at 20% 30%, #00fff7 0%, transparent 60%), radial-gradient(circle at 80% 70%, #ff00ea 0%, transparent 60%), linear-gradient(120deg, #050510 0%, #0a0a1a 100%)", backgroundSize: "200% 200%", transition: "background 0.5s"}} />
+      {/* Static Neon Background */}
+      <div className="absolute inset-0 -z-10" style={{background: "radial-gradient(circle at 20% 30%, #00fff7 0%, transparent 50%), radial-gradient(circle at 80% 70%, #ff00ea 0%, transparent 50%), #050510"}} />
 
       {/* HEADER */}
       <header className="w-full max-w-5xl mx-auto flex flex-col items-center text-center mb-20 relative">

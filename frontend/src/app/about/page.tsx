@@ -3,17 +3,7 @@ import Footer from "../components/Footer";
 
 export default function About() {
   return (
-    <main className="relative min-h-screen flex flex-col items-center px-4 py-24 overflow-hidden">
-      {/* Animated Neon Background */}
-      <div className="absolute inset-0 -z-10" style={{
-        background: "radial-gradient(circle at 20% 30%, #00fff7 0%, transparent 60%), radial-gradient(circle at 80% 70%, #ff00ea 0%, transparent 60%), linear-gradient(120deg, #050510 0%, #0a0a1a 100%)",
-        backgroundSize: "200% 200%",
-        transition: "background 0.5s"
-      }} />
-      
-      {/* Large faded SYNAPSE background */}
-      <span aria-hidden="true" className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[8rem] md:text-[12rem] font-black text-cyan-900 opacity-10 select-none pointer-events-none z-0" style={{letterSpacing: "-0.08em", whiteSpace: "nowrap"}}>SYNAPSE</span>
-
+    <main className="max-w-4xl mx-auto px-6 py-24 flex flex-col items-center">
       {/* Title */}
       <h1
         className="text-5xl md:text-6xl font-black text-center mb-6 neon-title"
