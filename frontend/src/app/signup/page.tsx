@@ -1,6 +1,20 @@
 "use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Signup() {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    // Simulate signup and redirect to email verification
+    setTimeout(() => {
+      router.push("/verify-email");
+    }, 1000);
+  };
+
   return (
     <main className="relative min-h-screen flex flex-col items-center justify-center px-4 py-8 overflow-hidden">
       {/* Static Neon Background - Same as Homepage */}
@@ -20,7 +34,7 @@ export default function Signup() {
         <p className="text-center text-gray-400 mb-8">Join the Synapse school platform</p>
 
         {/* Form */}
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={handleSubmit}>
           {/* Full Name */}
           <div className="group">
             <label htmlFor="fullName" className="block text-sm font-medium text-cyan-300 mb-2 transition-all group-focus-within:text-cyan-200">
@@ -32,6 +46,7 @@ export default function Signup() {
               name="fullName"
               placeholder="Enter your full name"
               className="neon-input w-full px-4 py-3 rounded-lg text-gray-100 placeholder-gray-500"
+              required
             />
           </div>
 
@@ -46,6 +61,7 @@ export default function Signup() {
               name="username"
               placeholder="Choose a username"
               className="neon-input w-full px-4 py-3 rounded-lg text-gray-100 placeholder-gray-500"
+              required
             />
           </div>
 
@@ -60,6 +76,7 @@ export default function Signup() {
               name="email"
               placeholder="Enter your email"
               className="neon-input w-full px-4 py-3 rounded-lg text-gray-100 placeholder-gray-500"
+              required
             />
           </div>
 
@@ -74,6 +91,7 @@ export default function Signup() {
               name="password"
               placeholder="Create a password"
               className="neon-input w-full px-4 py-3 rounded-lg text-gray-100 placeholder-gray-500"
+              required
             />
           </div>
 
@@ -86,6 +104,7 @@ export default function Signup() {
               id="role"
               name="role"
               className="neon-input w-full px-4 py-3 rounded-lg text-gray-100"
+              required
             >
               <option value="">Select your role</option>
               <option value="principal">Principal</option>
@@ -99,8 +118,9 @@ export default function Signup() {
           <button
             type="submit"
             className="neon-btn-enhanced w-full py-3 mt-2 group"
+            disabled={isLoading}
           >
-            <span className="relative z-10">Create Account</span>
+            <span className="relative z-10">{isLoading ? "Creating..." : "Create Account"}</span>
             <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400/20 to-fuchsia-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </button>
         </form>
