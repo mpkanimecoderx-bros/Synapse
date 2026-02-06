@@ -21,6 +21,19 @@ const adminGatewaySchema = z.object({
   secretKey: z.string(),
 });
 
+const verifyEmailSchema = z.object({
+  token: z.string(),
+});
+
+const forgotPasswordSchema = z.object({
+  email: z.string().email(),
+});
+
+const resetPasswordSchema = z.object({
+  token: z.string(),
+  newPassword: z.string().min(8),
+});
+
 // Helper function to generate verification token
 function generateVerificationToken(): string {
   return randomBytes(32).toString("hex");
@@ -280,6 +293,152 @@ export async function authRoutes(fastify: FastifyInstance) {
           success: true,
           message: "Logged out successfully",
         });
+    }
+  );
+
+  // POST /auth/verify-email
+  fastify.post(
+    "/verify-email",
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      try {
+        const { token } = verifyEmailSchema.parse(request.body);
+
+        const user = await User.findOne({ verificationToken: token });
+
+        if (!user) {
+          return reply.status(400).send({
+            success: false,
+            message: "Invalid or expired verification token",
+          });
+        }
+
+        if (user.isVerified) {
+          return reply.status(400).send({
+            success: false,
+            message: "Email already verified",
+          });
+        }
+
+        user.isVerified = true;
+        user.verificationToken = null;
+        await user.save();
+
+        fastify.log.info(`User verified: ${user.email}`);
+
+        return reply.send({
+          success: true,
+          message: "Email verified successfully",
+        });
+      } catch (error) {
+        if (error instanceof z.ZodError) {
+          return reply.status(400).send({
+            success: false,
+            message: "Validation failed",
+            errors: error.errors,
+          });
+        }
+
+        fastify.log.error(error);
+        return reply.status(500).send({
+          success: false,
+          message: "Internal server error",
+        });
+      }
+    }
+  );
+
+  // POST /auth/forgot-password
+  fastify.post(
+    "/forgot-password",
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      try {
+        const { email } = forgotPasswordSchema.parse(request.body);
+
+        const user = await User.findOne({ email });
+
+        if (!user) {
+          // Don't reveal if email exists or not for security
+          return reply.send({
+            success: true,
+            message: "If an account with that email exists, a password reset link has been sent.",
+          });
+        }
+
+        const resetToken = generateVerificationToken();
+        user.verificationToken = resetToken;
+        await user.save();
+
+        // In production, send password reset email here
+        const resetUrl = `/reset-password?token=${resetToken}`;
+
+        fastify.log.info(`Password reset requested for: ${user.email}`);
+
+        return reply.send({
+          success: true,
+          message: "If an account with that email exists, a password reset link has been sent.",
+          data: {
+            resetUrl, // Remove in production
+          },
+        });
+      } catch (error) {
+        if (error instanceof z.ZodError) {
+          return reply.status(400).send({
+            success: false,
+            message: "Validation failed",
+            errors: error.errors,
+          });
+        }
+
+        fastify.log.error(error);
+        return reply.status(500).send({
+          success: false,
+          message: "Internal server error",
+        });
+      }
+    }
+  );
+
+  // POST /auth/reset-password
+  fastify.post(
+    "/reset-password",
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      try {
+        const { token, newPassword } = resetPasswordSchema.parse(request.body);
+
+        const user = await User.findOne({ verificationToken: token });
+
+        if (!user) {
+          return reply.status(400).send({
+            success: false,
+            message: "Invalid or expired reset token",
+          });
+        }
+
+        user.password = newPassword; // Will be hashed by pre-save hook
+        user.verificationToken = null;
+        await user.save();
+
+        fastify.log.info(`Password reset for: ${user.email}`);
+
+        return reply.send({
+          success: true,
+          message: "Password reset successfully",
+        });
+      } catch (error) {
+        if (error instanceof z.ZodError) {
+          return reply.status(400).send({
+            success: false,
+            message: "Validation failed",
+            errors: error.errors,
+          });
+        }
+
+        fastify.log.error(error);
+        return reply.status(500).send({
+          success: false,
+          message: "Internal server error",
+        });
+      }
     }
   );
 }
