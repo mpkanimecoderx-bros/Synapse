@@ -181,3 +181,9 @@ mongodb_data/
 # Temporary files
 *.tmp
 *.temp
+
+# Documentation with credentials (local only - never push)
+MPK.md
+*.credentials.md
+*.secrets.md
+*.notes.md
