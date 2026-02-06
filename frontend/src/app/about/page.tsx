@@ -3,12 +3,12 @@ import Footer from "../components/Footer";
 
 export default function About() {
   return (
-    <main className="relative min-h-screen flex flex-col items-center justify-center px-4 py-8 overflow-hidden">
-      {/* Static Neon Background - Same as Homepage */}
-      <div className="absolute inset-0 -z-10" style={{background: "radial-gradient(circle at 20% 30%, #00fff7 0%, transparent 50%), radial-gradient(circle at 80% 70%, #ff00ea 0%, transparent 50%), #050510"}} />
+    <main className="relative min-h-screen flex flex-col items-center justify-center px-4 py-16 overflow-hidden">
+      {/* Dark Background */}
+      <div className="absolute inset-0 -z-10" style={{background: "radial-gradient(ellipse at 20% 20%, rgba(0, 255, 255, 0.06) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(255, 0, 255, 0.06) 0%, transparent 40%), #020205"}} />
 
-      {/* Large faded SYNAPSE background - positioned upper */}
-      <span aria-hidden="true" className="absolute left-1/2 top-[35%] -translate-x-1/2 -translate-y-1/2 text-[10rem] md:text-[16rem] font-black text-cyan-900 opacity-10 select-none pointer-events-none z-0" style={{letterSpacing: "-0.08em", whiteSpace: "nowrap"}}>SYNAPSE</span>
+      {/* Faded SYNAPSE Background - Higher position */}
+      <span aria-hidden="true" className="absolute left-1/2 top-[15%] -translate-x-1/2 text-[10rem] md:text-[16rem] font-black text-cyan-900 opacity-10 select-none pointer-events-none z-0 whitespace-nowrap" style={{letterSpacing: "-0.08em"}}>SYNAPSE</span>
 
       {/* Title */}
       <h1
@@ -29,8 +29,8 @@ export default function About() {
 
       {/* Card */}
       <section
-        className="neon-card w-full max-w-4xl shadow-2xl text-gray-100 relative z-10"
-        style={{ background: "rgba(10,10,20,0.95)" }}
+        className="neon-card w-full shadow-2xl text-gray-100 relative z-10"
+        style={{ background: "rgba(10,10,20,0.96)" }}
       >
         {/* Intro */}
         <p className="mb-8 text-lg leading-relaxed">

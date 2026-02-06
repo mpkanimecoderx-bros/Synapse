@@ -1,13 +1,14 @@
 "use client";
+import Link from "next/link";
 
 export default function Login() {
   return (
     <main className="relative min-h-screen flex flex-col items-center justify-center px-4 py-8 overflow-hidden">
-      {/* Static Neon Background - Same as Homepage and Signup */}
-      <div className="absolute inset-0 -z-10" style={{background: "radial-gradient(circle at 20% 30%, #00fff7 0%, transparent 50%), radial-gradient(circle at 80% 70%, #ff00ea 0%, transparent 50%), #050510"}} />
+      {/* Dark Background */}
+      <div className="absolute inset-0 -z-10" style={{background: "radial-gradient(ellipse at 20% 20%, rgba(0, 255, 255, 0.06) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(255, 0, 255, 0.06) 0%, transparent 40%), #020205"}} />
 
-      {/* Large faded SYNAPSE background - positioned upper */}
-      <span aria-hidden="true" className="absolute left-1/2 top-[35%] -translate-x-1/2 -translate-y-1/2 text-[10rem] md:text-[16rem] font-black text-cyan-900 opacity-10 select-none pointer-events-none z-0" style={{letterSpacing: "-0.08em", whiteSpace: "nowrap"}}>SYNAPSE</span>
+      {/* Faded SYNAPSE Background - Higher position */}
+      <span aria-hidden="true" className="absolute left-1/2 top-[15%] -translate-x-1/2 text-[10rem] md:text-[16rem] font-black text-cyan-900 opacity-10 select-none pointer-events-none z-0 whitespace-nowrap" style={{letterSpacing: "-0.08em"}}>SYNAPSE</span>
 
       {/* Login Card with floating animation */}
       <div className="neon-card neon-float w-full max-w-md relative z-10">
@@ -32,6 +33,7 @@ export default function Login() {
               name="email"
               placeholder="Enter your email or username"
               className="neon-input w-full px-4 py-3 rounded-lg text-gray-100 placeholder-gray-500"
+              required
             />
           </div>
 
@@ -46,6 +48,7 @@ export default function Login() {
               name="password"
               placeholder="Enter your password"
               className="neon-input w-full px-4 py-3 rounded-lg text-gray-100 placeholder-gray-500"
+              required
             />
           </div>
 
@@ -61,13 +64,13 @@ export default function Login() {
           </div>
 
           {/* Submit Button - Enhanced */}
-          <button
-            type="submit"
-            className="neon-btn-enhanced w-full py-3 mt-2 group"
+          <a
+            href="/dashboard"
+            className="neon-btn-enhanced inline-block w-full py-3 mt-2 group text-center"
           >
             <span className="relative z-10">Sign In</span>
             <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400/20 to-fuchsia-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </button>
+          </a>
         </form>
 
         {/* Divider */}
@@ -77,7 +80,7 @@ export default function Login() {
           <div className="flex-1 border-t border-cyan-500/20"></div>
         </div>
 
-        {/* OAuth Buttons - Enhanced */}
+        {/* OAuth Buttons */}
         <div className="space-y-3">
           {/* Google */}
           <button

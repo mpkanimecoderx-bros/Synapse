@@ -30,25 +30,6 @@
   overflow: hidden;
 }
 
-/* Remove shimmer animation for better performance */
-/* .neon-card::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    45deg,
-    transparent 30%,
-    rgba(0, 255, 255, 0.08) 50%,
-    transparent 70%
-  );
-  animation: shimmer 4s linear infinite;
-  will-change: transform;
-  pointer-events: none;
-} */
-
 .neon-card:hover {
   transform: translateY(-3px);
   box-shadow: 
@@ -110,24 +91,6 @@
   overflow: hidden;
 }
 
-/* Remove shine animation for better performance */
-/* .neon-btn-enhanced::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    45deg,
-    transparent 40%,
-    rgba(255, 255, 255, 0.2) 50%,
-    transparent 60%
-  );
-  animation: shine 4s linear infinite;
-  will-change: transform;
-} */
-
 .neon-btn-enhanced:hover {
   background: linear-gradient(135deg, #00e5ff, #00b3b3);
   transform: translateY(-2px) scale(1.01);
@@ -173,21 +136,21 @@
 }
 
 :root {
-  --background: #050510;
+  --background: #020205;
   --foreground: #e0e0ff;
   --primary: #00ffff;
   --accent: #ff00ff;
   --card-bg: rgba(10, 10, 20, 0.9);
 }
 
-/* Base body styles - simplified */
+/* Darker background for all pages */
 body {
   margin: 0;
   padding: 0;
   background: 
-    radial-gradient(ellipse at 20% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 40%),
-    radial-gradient(ellipse at 80% 80%, rgba(255, 0, 255, 0.1) 0%, transparent 40%),
-    #050510;
+    radial-gradient(ellipse at 20% 20%, rgba(0, 255, 255, 0.06) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 80%, rgba(255, 0, 255, 0.06) 0%, transparent 40%),
+    #020205;
   background-size: 100% 100%;
   color: var(--foreground);
   font-family: system-ui, -apple-system, sans-serif;
@@ -260,7 +223,7 @@ button:hover, .neon-btn:hover {
 }
 
 ::-webkit-scrollbar-track {
-  background: #050510;
+  background: #020205;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -270,7 +233,7 @@ button:hover, .neon-btn:hover {
 
 /* Navbar styles */
 .neon-navbar {
-  background: rgba(5, 5, 16, 0.9);
+  background: rgba(2, 2, 5, 0.95);
   backdrop-filter: blur(10px);
   border-bottom: 2px solid var(--primary);
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);

@@ -18,6 +18,9 @@ export default function Navbar() {
         </div>
 
         <div className="flex gap-8 text-base items-center">
+          <Link href="/dashboard" className="neon-link">
+            Dashboard
+          </Link>
           <Link href="/about" className="neon-link">
             About
           </Link>

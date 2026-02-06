@@ -1,40 +1,31 @@
 "use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Signup() {
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    // Simulate signup and redirect to email verification
-    setTimeout(() => {
-      router.push("/verify-email");
-    }, 1000);
-  };
-
   return (
     <main className="relative min-h-screen flex flex-col items-center justify-center px-4 py-8 overflow-hidden">
-      {/* Static Neon Background - Same as Homepage */}
-      <div className="absolute inset-0 -z-10" style={{background: "radial-gradient(circle at 20% 30%, #00fff7 0%, transparent 50%), radial-gradient(circle at 80% 70%, #ff00ea 0%, transparent 50%), #050510"}} />
+      {/* Dark Background */}
+      <div className="absolute inset-0 -z-10" style={{background: "radial-gradient(ellipse at 20% 20%, rgba(0, 255, 255, 0.06) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(255, 0, 255, 0.06) 0%, transparent 40%), #020205"}} />
 
-      {/* Large faded SYNAPSE background - positioned upper */}
-      <span aria-hidden="true" className="absolute left-1/2 top-[35%] -translate-x-1/2 -translate-y-1/2 text-[10rem] md:text-[16rem] font-black text-cyan-900 opacity-10 select-none pointer-events-none z-0" style={{letterSpacing: "-0.08em", whiteSpace: "nowrap"}}>SYNAPSE</span>
+      {/* Faded SYNAPSE Background - Higher position */}
+      <span aria-hidden="true" className="absolute left-1/2 top-[15%] -translate-x-1/2 text-[10rem] md:text-[16rem] font-black text-cyan-900 opacity-10 select-none pointer-events-none z-0 whitespace-nowrap" style={{letterSpacing: "-0.08em"}}>SYNAPSE</span>
 
       {/* Signup Card with floating animation */}
       <div className="neon-card neon-float w-full max-w-md relative z-10">
-        <h1 className="text-3xl font-bold text-center mb-2" style={{
-          color: '#00fff7',
-          textShadow: '0 0 10px #00fff7, 0 0 20px rgba(0, 255, 247, 0.5)'
+        {/* Decorative glow orb */}
+        <div className="absolute -top-20 -right-20 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-fuchsia-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <h1 className="text-3xl font-bold text-center mb-2 relative z-10" style={{
+          color: "#00fff7",
+          textShadow: "0 0 10px #00fff7, 0 0 20px rgba(0, 255, 247, 0.5)"
         }}>
           Create Account
         </h1>
-        <p className="text-center text-gray-400 mb-8">Join the Synapse school platform</p>
+        <p className="text-center text-gray-400 mb-8 relative z-10">Join the Synapse school platform</p>
 
-        {/* Form */}
-        <form className="space-y-5" onSubmit={handleSubmit}>
+        {/* Form - Inline styles for simplicity */}
+        <div className="space-y-5 relative z-10">
           {/* Full Name */}
           <div className="group">
             <label htmlFor="fullName" className="block text-sm font-medium text-cyan-300 mb-2 transition-all group-focus-within:text-cyan-200">
@@ -43,10 +34,8 @@ export default function Signup() {
             <input
               type="text"
               id="fullName"
-              name="fullName"
               placeholder="Enter your full name"
               className="neon-input w-full px-4 py-3 rounded-lg text-gray-100 placeholder-gray-500"
-              required
             />
           </div>
 
@@ -58,10 +47,8 @@ export default function Signup() {
             <input
               type="text"
               id="username"
-              name="username"
               placeholder="Choose a username"
               className="neon-input w-full px-4 py-3 rounded-lg text-gray-100 placeholder-gray-500"
-              required
             />
           </div>
 
@@ -73,10 +60,8 @@ export default function Signup() {
             <input
               type="email"
               id="email"
-              name="email"
               placeholder="Enter your email"
               className="neon-input w-full px-4 py-3 rounded-lg text-gray-100 placeholder-gray-500"
-              required
             />
           </div>
 
@@ -88,10 +73,8 @@ export default function Signup() {
             <input
               type="password"
               id="password"
-              name="password"
               placeholder="Create a password"
               className="neon-input w-full px-4 py-3 rounded-lg text-gray-100 placeholder-gray-500"
-              required
             />
           </div>
 
@@ -102,9 +85,7 @@ export default function Signup() {
             </label>
             <select
               id="role"
-              name="role"
               className="neon-input w-full px-4 py-3 rounded-lg text-gray-100"
-              required
             >
               <option value="">Select your role</option>
               <option value="principal">Principal</option>
@@ -114,26 +95,25 @@ export default function Signup() {
             </select>
           </div>
 
-          {/* Submit Button - Enhanced */}
-          <button
-            type="submit"
-            className="neon-btn-enhanced w-full py-3 mt-2 group"
-            disabled={isLoading}
+          {/* Submit Button */}
+          <Link
+            href="/verify-email"
+            className="neon-btn-enhanced inline-block w-full py-3 mt-2 group text-center"
           >
-            <span className="relative z-10">{isLoading ? "Creating..." : "Create Account"}</span>
+            <span className="relative z-10">Create Account</span>
             <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400/20 to-fuchsia-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </button>
-        </form>
+          </Link>
+        </div>
 
         {/* Divider */}
-        <div className="flex items-center my-8">
+        <div className="flex items-center my-8 relative z-10">
           <div className="flex-1 border-t border-cyan-500/20"></div>
           <span className="px-4 text-gray-500 text-sm">or continue with</span>
           <div className="flex-1 border-t border-cyan-500/20"></div>
         </div>
 
-        {/* OAuth Buttons - Enhanced */}
-        <div className="space-y-3">
+        {/* OAuth Buttons */}
+        <div className="space-y-3 relative z-10">
           {/* Google */}
           <button
             type="button"
@@ -166,7 +146,7 @@ export default function Signup() {
         </div>
 
         {/* Login Link */}
-        <p className="text-center text-gray-400 mt-8">
+        <p className="text-center text-gray-400 mt-8 relative z-10">
           Already have an account?{" "}
           <a href="/login" className="neon-link inline-block transition-all hover:scale-105">
             Log in

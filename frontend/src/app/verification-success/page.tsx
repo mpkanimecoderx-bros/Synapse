@@ -4,24 +4,24 @@ import Link from "next/link";
 export default function VerificationSuccess() {
   return (
     <main className="relative min-h-screen flex flex-col items-center justify-center px-4 py-8 overflow-hidden">
-      {/* Static Neon Background - Same as Homepage */}
-      <div className="absolute inset-0 -z-10" style={{background: "radial-gradient(circle at 20% 30%, #00fff7 0%, transparent 50%), radial-gradient(circle at 80% 70%, #ff00ea 0%, transparent 50%), #050510"}} />
+      {/* Dark Background */}
+      <div className="absolute inset-0 -z-10" style={{background: "radial-gradient(ellipse at 20% 20%, rgba(0, 255, 255, 0.06) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(255, 0, 255, 0.06) 0%, transparent 40%), #020205"}} />
 
-      {/* Large faded SYNAPSE background - positioned upper */}
-      <span aria-hidden="true" className="absolute left-1/2 top-[35%] -translate-x-1/2 -translate-y-1/2 text-[10rem] md:text-[16rem] font-black text-cyan-900 opacity-10 select-none pointer-events-none z-0" style={{letterSpacing: "-0.08em", whiteSpace: "nowrap"}}>SYNAPSE</span>
+      {/* Faded SYNAPSE Background - Higher position */}
+      <span aria-hidden="true" className="absolute left-1/2 top-[15%] -translate-x-1/2 text-[10rem] md:text-[16rem] font-black text-cyan-900 opacity-10 select-none pointer-events-none z-0 whitespace-nowrap" style={{letterSpacing: "-0.08em"}}>SYNAPSE</span>
 
       {/* Card with floating animation */}
       <div className="neon-card neon-float w-full max-w-md relative z-10 text-center">
         {/* Success Icon */}
-        <div className="mx-auto mb-6 w-20 h-20 rounded-full bg-cyan-500/20 flex items-center justify-center" style={{boxShadow: '0 0 30px rgba(0, 255, 255, 0.3)'}}>
+        <div className="mx-auto mb-6 w-20 h-20 rounded-full bg-cyan-500/20 flex items-center justify-center" style={{boxShadow: "0 0 30px rgba(0, 255, 255, 0.3)"}}>
           <svg className="w-10 h-10 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
 
         <h1 className="text-3xl font-bold text-center mb-4" style={{
-          color: '#00fff7',
-          textShadow: '0 0 10px #00fff7, 0 0 20px rgba(0, 255, 247, 0.5)'
+          color: "#00fff7",
+          textShadow: "0 0 10px #00fff7, 0 0 20px rgba(0, 255, 247, 0.5)"
         }}>
           Email Verified
         </h1>
