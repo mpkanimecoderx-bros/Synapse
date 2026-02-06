@@ -1,7 +1,43 @@
 "use client";
+
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Signup() {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    username: "",
+    email: "",
+    password: "",
+    role: "",
+  });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { signup } = useAuth();
+  const router = useRouter();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    const result = await signup(formData);
+
+    if (result.success) {
+      router.push("/verify-email");
+    } else {
+      setError(result.message || "Registration failed");
+    }
+
+    setLoading(false);
+  };
+
   return (
     <main className="relative min-h-screen flex flex-col items-center justify-center px-4 py-8 overflow-hidden">
       {/* Dark Background */}
@@ -24,8 +60,15 @@ export default function Signup() {
         </h1>
         <p className="text-center text-gray-400 mb-8 relative z-10">Join the Synapse school platform</p>
 
-        {/* Form - Inline styles for simplicity */}
-        <div className="space-y-5 relative z-10">
+        {/* Error Message */}
+        {error && (
+          <div className="mb-6 p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm text-center relative z-10">
+            {error}
+          </div>
+        )}
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-5 relative z-10">
           {/* Full Name */}
           <div className="group">
             <label htmlFor="fullName" className="block text-sm font-medium text-cyan-300 mb-2 transition-all group-focus-within:text-cyan-200">
@@ -34,8 +77,12 @@ export default function Signup() {
             <input
               type="text"
               id="fullName"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleChange}
               placeholder="Enter your full name"
               className="neon-input w-full px-4 py-3 rounded-lg text-gray-100 placeholder-gray-500"
+              required
             />
           </div>
 
@@ -47,8 +94,12 @@ export default function Signup() {
             <input
               type="text"
               id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
               placeholder="Choose a username"
               className="neon-input w-full px-4 py-3 rounded-lg text-gray-100 placeholder-gray-500"
+              required
             />
           </div>
 
@@ -60,8 +111,12 @@ export default function Signup() {
             <input
               type="email"
               id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
               placeholder="Enter your email"
               className="neon-input w-full px-4 py-3 rounded-lg text-gray-100 placeholder-gray-500"
+              required
             />
           </div>
 
@@ -73,8 +128,13 @@ export default function Signup() {
             <input
               type="password"
               id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
               placeholder="Create a password"
               className="neon-input w-full px-4 py-3 rounded-lg text-gray-100 placeholder-gray-500"
+              required
+              minLength={8}
             />
           </div>
 
@@ -85,7 +145,11 @@ export default function Signup() {
             </label>
             <select
               id="role"
+              name="role"
+              value={formData.role}
+              onChange={handleChange}
               className="neon-input w-full px-4 py-3 rounded-lg text-gray-100"
+              required
             >
               <option value="">Select your role</option>
               <option value="principal">Principal</option>
@@ -96,14 +160,15 @@ export default function Signup() {
           </div>
 
           {/* Submit Button */}
-          <Link
-            href="/verify-email"
-            className="neon-btn-enhanced inline-block w-full py-3 mt-2 group text-center"
+          <button
+            type="submit"
+            disabled={loading}
+            className="neon-btn-enhanced inline-block w-full py-3 mt-2 group text-center cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <span className="relative z-10">Create Account</span>
+            <span className="relative z-10">{loading ? "Creating Account..." : "Create Account"}</span>
             <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400/20 to-fuchsia-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </Link>
-        </div>
+          </button>
+        </form>
 
         {/* Divider */}
         <div className="flex items-center my-8 relative z-10">
@@ -148,9 +213,9 @@ export default function Signup() {
         {/* Login Link */}
         <p className="text-center text-gray-400 mt-8 relative z-10">
           Already have an account?{" "}
-          <a href="/login" className="neon-link inline-block transition-all hover:scale-105">
+          <Link href="/login" className="neon-link inline-block transition-all hover:scale-105">
             Log in
-          </a>
+          </Link>
         </p>
       </div>
     </main>

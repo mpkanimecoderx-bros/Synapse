@@ -18,21 +18,17 @@ export default function Navbar() {
         </div>
 
         <div className="flex gap-8 text-base items-center">
-          <Link href="/dashboard" className="neon-link">
-            Dashboard
-          </Link>
           <Link href="/about" className="neon-link">
             About
           </Link>
-          <Link href="/signup" className="neon-btn" style={{ padding: '0.6em 1.8em', fontSize: '0.9em' }}>
-            Signup
-          </Link>
           <Link href="/login" className="neon-btn" style={{ padding: '0.6em 1.8em', fontSize: '0.9em' }}>
             Login
+          </Link>
+          <Link href="/signup" className="neon-btn" style={{ padding: '0.6em 1.8em', fontSize: '0.9em' }}>
+            Signup
           </Link>
         </div>
       </div>
     </nav>
   );
 }
-

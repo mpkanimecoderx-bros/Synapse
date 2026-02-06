@@ -1,7 +1,34 @@
 "use client";
+
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Login() {
+  const [emailOrUsername, setEmailOrUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    const result = await login(emailOrUsername, password);
+
+    if (result.success) {
+      router.push("/dashboard");
+    } else {
+      setError(result.message || "Login failed");
+    }
+
+    setLoading(false);
+  };
+
   return (
     <main className="relative min-h-screen flex flex-col items-center justify-center px-4 py-8 overflow-hidden">
       {/* Dark Background */}
@@ -20,17 +47,26 @@ export default function Login() {
         </h1>
         <p className="text-center text-gray-400 mb-8">Sign in to your Synapse account</p>
 
+        {/* Error Message */}
+        {error && (
+          <div className="mb-6 p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm text-center">
+            {error}
+          </div>
+        )}
+
         {/* Form */}
-        <form className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-5">
           {/* Email/Username */}
           <div className="group">
-            <label htmlFor="email" className="block text-sm font-medium text-cyan-300 mb-2 transition-all group-focus-within:text-cyan-200">
+            <label htmlFor="emailOrUsername" className="block text-sm font-medium text-cyan-300 mb-2 transition-all group-focus-within:text-cyan-200">
               Email or Username
             </label>
             <input
               type="text"
-              id="email"
-              name="email"
+              id="emailOrUsername"
+              name="emailOrUsername"
+              value={emailOrUsername}
+              onChange={(e) => setEmailOrUsername(e.target.value)}
               placeholder="Enter your email or username"
               className="neon-input w-full px-4 py-3 rounded-lg text-gray-100 placeholder-gray-500"
               required
@@ -46,6 +82,8 @@ export default function Login() {
               type="password"
               id="password"
               name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
               className="neon-input w-full px-4 py-3 rounded-lg text-gray-100 placeholder-gray-500"
               required
@@ -58,19 +96,20 @@ export default function Login() {
               <input type="checkbox" className="w-4 h-4 rounded border-cyan-500/30 bg-black/40 text-cyan-400 focus:ring-cyan-400" />
               <span className="text-sm text-gray-400">Remember me</span>
             </label>
-            <a href="/forgot-password" className="text-sm text-cyan-400 hover:text-cyan-300 transition-colors">
+            <Link href="/forgot-password" className="text-sm text-cyan-400 hover:text-cyan-300 transition-colors">
               Forgot password?
-            </a>
+            </Link>
           </div>
 
           {/* Submit Button - Enhanced */}
-          <a
-            href="/dashboard"
-            className="neon-btn-enhanced inline-block w-full py-3 mt-2 group text-center"
+          <button
+            type="submit"
+            disabled={loading}
+            className="neon-btn-enhanced inline-block w-full py-3 mt-2 group text-center cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <span className="relative z-10">Sign In</span>
+            <span className="relative z-10">{loading ? "Signing in..." : "Sign In"}</span>
             <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-400/20 to-fuchsia-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </a>
+          </button>
         </form>
 
         {/* Divider */}
@@ -116,9 +155,9 @@ export default function Login() {
         {/* Sign Up Link */}
         <p className="text-center text-gray-400 mt-8">
           Do not have an account?{" "}
-          <a href="/signup" className="neon-link inline-block transition-all hover:scale-105">
+          <Link href="/signup" className="neon-link inline-block transition-all hover:scale-105">
             Sign up
-          </a>
+          </Link>
         </p>
       </div>
     </main>
